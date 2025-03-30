@@ -1,4 +1,6 @@
 // src/app/components/home/HowItWorksSection.tsx
+'use client';
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -16,9 +18,8 @@ export const HowItWorksSection: React.FC = () => {
         
         <div className="max-w-3xl mx-auto">
           <div className="relative">
-            {/* Vertical line connecting steps */}
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-            
+
             {/* Step 1 */}
             <div className="relative flex items-start mb-12">
               <div className="flex-shrink-0 h-16 w-16 rounded-full bg-amber-500 text-white flex items-center justify-center text-xl font-bold z-10">
@@ -33,7 +34,7 @@ export const HowItWorksSection: React.FC = () => {
                 </p>
               </div>
             </div>
-            
+
             {/* Step 2 */}
             <div className="relative flex items-start mb-12">
               <div className="flex-shrink-0 h-16 w-16 rounded-full bg-amber-500 text-white flex items-center justify-center text-xl font-bold z-10">
@@ -48,7 +49,7 @@ export const HowItWorksSection: React.FC = () => {
                 </p>
               </div>
             </div>
-            
+
             {/* Step 3 */}
             <div className="relative flex items-start">
               <div className="flex-shrink-0 h-16 w-16 rounded-full bg-amber-500 text-white flex items-center justify-center text-xl font-bold z-10">
