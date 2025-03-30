@@ -1,4 +1,6 @@
 // src/app/components/home/FeaturesSection.tsx
+'use client';
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
