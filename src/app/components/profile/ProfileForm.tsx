@@ -1,4 +1,3 @@
-// src/app/components/profile/ProfileForm.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -51,7 +50,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const [photoURL, setPhotoURL] = useState<string | undefined>(initialProfile?.photoURL);
-  
+
   const { register, handleSubmit, formState: { errors }, control } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -67,7 +66,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
       explanation: initialRightsAdjustment?.explanation || '',
     },
   });
-  
+
   const handleFormSubmit = (data: FormValues) => {
     const profile: Partial<Profile> = {
       displayName: data.displayName,
@@ -81,16 +80,16 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
       photoURL,
       gender,
     };
-    
+
     const rightsAdjustment: Partial<RightsAdjustment> = {
       gender,
       adjustedRights: data.adjustedRights,
       explanation: data.explanation,
     };
-    
+
     onSubmit(profile, rightsAdjustment);
   };
-  
+
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -101,12 +100,12 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
       reader.readAsDataURL(file);
     }
   };
-  
+
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">{t('profile.basicInfo')}</h2>
-        
+
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <label className="block text-sm font-medium mb-1">{t('profile.name')}</label>
@@ -119,7 +118,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               <p className="text-red-500 text-sm mt-1">{errors.displayName.message}</p>
             )}
           </div>
-          
+
           <div className="w-32">
             <label className="block text-sm font-medium mb-1">{t('profile.age')}</label>
             <input
@@ -132,7 +131,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             )}
           </div>
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium mb-1">{t('profile.location')}</label>
           <input
@@ -144,7 +143,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>
           )}
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium mb-1">{t('profile.bio')}</label>
           <textarea
@@ -157,7 +156,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <p className="text-red-500 text-sm mt-1">{errors.bio.message}</p>
           )}
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium mb-1">{t('profile.photo')}</label>
           <input
@@ -177,10 +176,10 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
           )}
         </div>
       </div>
-      
+
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">{t('profile.additionalInfo')}</h2>
-        
+
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <label className="block text-sm font-medium mb-1">{t('profile.education')}</label>
@@ -190,7 +189,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               placeholder={t('profile.educationPlaceholder')}
             />
           </div>
-          
+
           <div className="flex-1">
             <label className="block text-sm font-medium mb-1">{t('profile.occupation')}</label>
             <input
@@ -200,7 +199,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             />
           </div>
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium mb-1">{t('profile.religiousLevel')}</label>
           <select
@@ -212,7 +211,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <option value="cultural">{t('profile.cultural')}</option>
           </select>
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium mb-1">{t('profile.languages')}</label>
           <div className="flex flex-wrap gap-2">
@@ -233,17 +232,17 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
           )}
         </div>
       </div>
-      
+
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">{t('profile.rightsAdjustment')}</h2>
         <p className="text-gray-600">{t('profile.rightsDescription')}</p>
-        
+
         <RightsSelector
           gender={gender}
           control={control}
           name="adjustedRights"
         />
-        
+
         <div>
           <label className="block text-sm font-medium mb-1">{t('profile.explanation')}</label>
           <textarea
@@ -257,7 +256,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
           )}
         </div>
       </div>
-      
+
       <Button type="submit" className="w-full">
         {initialProfile ? t('profile.updateProfile') : t('profile.createProfile')}
       </Button>
