@@ -1,4 +1,6 @@
 // src/app/components/home/TestimonialsSection.tsx
+'use client';
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
