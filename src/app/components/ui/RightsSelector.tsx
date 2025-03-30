@@ -1,4 +1,6 @@
 // src/app/components/ui/RightsSelector.tsx
+'use client';
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/app/utils/cn';
