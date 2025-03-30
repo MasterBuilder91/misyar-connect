@@ -1,4 +1,5 @@
-// src/app/components/layout/Footer.tsx
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
