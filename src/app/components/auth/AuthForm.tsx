@@ -1,4 +1,5 @@
-// src/app/components/auth/AuthForm.tsx
+'use client';
+
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
@@ -19,13 +20,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const [mode, setMode] = useState<AuthMode>('login');
-  
-  // Define validation schemas
+
   const loginSchema = z.object({
     email: z.string().email(t('validation.emailRequired')),
     password: z.string().min(6, t('validation.passwordLength')),
   });
-  
+
   const signupSchema = z.object({
     email: z.string().email(t('validation.emailRequired')),
     password: z.string().min(6, t('validation.passwordLength')),
@@ -34,38 +34,35 @@ export const AuthForm: React.FC<AuthFormProps> = ({
     message: t('validation.passwordsMatch'),
     path: ['confirmPassword'],
   });
-  
+
   const forgotPasswordSchema = z.object({
     email: z.string().email(t('validation.emailRequired')),
   });
-  
-  // Get the active schema based on mode
-  const activeSchema = 
+
+  const activeSchema =
     mode === 'login' ? loginSchema :
     mode === 'signup' ? signupSchema :
     forgotPasswordSchema;
-  
-  // Initialize form
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(activeSchema),
   });
-  
-  // Handle form submission
+
   const handleFormSubmit = (data: any) => {
     onSubmit({ ...data, mode });
   };
-  
+
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="bg-white rounded-xl shadow-card p-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-          {mode === 'login' ? t('auth.login') : 
-           mode === 'signup' ? t('auth.createAccount') : 
+          {mode === 'login' ? t('auth.login') :
+           mode === 'signup' ? t('auth.createAccount') :
            t('auth.forgotPassword')}
         </h2>
-        
+
         <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
-          {/* Email Field */}
+          {/* Email */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
               {t('auth.email')}
@@ -80,8 +77,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               <p className="mt-1 text-sm text-red-600">{errors.email.message as string}</p>
             )}
           </div>
-          
-          {/* Password Field - Only for login and signup */}
+
+          {/* Password */}
           {(mode === 'login' || mode === 'signup') && (
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
@@ -98,8 +95,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               )}
             </div>
           )}
-          
-          {/* Confirm Password Field - Only for signup */}
+
+          {/* Confirm Password */}
           {mode === 'signup' && (
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
@@ -116,8 +113,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               )}
             </div>
           )}
-          
-          {/* Forgot Password Link - Only for login */}
+
+          {/* Forgot Password Link */}
           {mode === 'login' && (
             <div className="text-right">
               <button
@@ -129,8 +126,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               </button>
             </div>
           )}
-          
-          {/* Submit Button */}
+
+          {/* Submit */}
           <Button
             type="submit"
             variant="primary"
@@ -141,55 +138,4 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               <span className="flex items-center justify-center">
                 <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                {t('common.loading')}
-              </span>
-            ) : (
-              mode === 'login' ? t('auth.login') : 
-              mode === 'signup' ? t('auth.signup') : 
-              t('auth.resetPassword')
-            )}
-          </Button>
-          
-          {/* Mode Toggle */}
-          <div className="text-center mt-4">
-            {mode === 'login' ? (
-              <p className="text-sm text-gray-600">
-                {t('auth.dontHaveAccount')}{' '}
-                <button
-                  type="button"
-                  onClick={() => setMode('signup')}
-                  className="text-teal-700 hover:text-teal-800 font-medium"
-                >
-                  {t('auth.signup')}
-                </button>
-              </p>
-            ) : mode === 'signup' ? (
-              <p className="text-sm text-gray-600">
-                {t('auth.alreadyHaveAccount')}{' '}
-                <button
-                  type="button"
-                  onClick={() => setMode('login')}
-                  className="text-teal-700 hover:text-teal-800 font-medium"
-                >
-                  {t('auth.login')}
-                </button>
-              </p>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setMode('login')}
-                className="text-teal-700 hover:text-teal-800 font-medium text-sm"
-              >
-                {t('auth.backToLogin')}
-              </button>
-            )}
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-};
-
-export default AuthForm;
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3
